@@ -206,3 +206,35 @@ def cantidadDiasMes(numMes, anno):
 #= De aqui en adelante se agregan los requerimientos de la parte 3b
 #=
 #===============================================================================================================
+
+#Esta funcion es necesaria para el calculo del primer
+#dia de un mes en especifico
+def moduloMes(mes, anno):
+    resultado = 0
+    if(mes >= 1 and mes <= 12):
+        for i in range(1,mes):
+            resultado = resultado + cantidadDiasMes(i, anno)%7
+        resultado = resultado % 7
+    return resultado
+
+#R9
+#Dada una fecha se espera que retorne un dia 0 = Domingo, 1 = Lunes, ...
+def dia_semana(fecha):
+    resultado = -1 #Si retorna -1 hay un error
+    if(fecha_es_valida(fecha)): #Verifica que sea (dia,mes,anno)
+        modMes = moduloMes(fecha[1], fecha[0])
+        annodecre = fecha[0] - 1
+        resultado = ((annodecre % 7)+(((annodecre//4) -(3 * (((annodecre//100) + 1) // 4)))%7) + modMes + (fecha[2] % 7)) % 7
+    return resultado
+
+#R10
+#Dado un anno y mes, esta funcion nos retorna el primer dia del mes dado
+def dia_inicio_mes (anno, mes):
+    resultado = 0
+    if(anno >= 1582 and mes >= 1 and mes <= 12):
+        resultado = dia_semana((anno,mes,1))
+    else:
+        resultado = -1
+    return resultado #Si no es un mes y anno valido retorna -1
+        
+
