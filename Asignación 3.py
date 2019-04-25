@@ -207,6 +207,20 @@ def cantidadDiasMes(numMes, anno):
 #=
 #===============================================================================================================
 
+
+#R7
+#Dados una fecha válida f y un número entero no-negativo n,
+#determinar la fecha que está n días naturales en el futuro.
+def fecha_futura(fecha,dias):
+    if(fecha_es_valida(fecha) and dias >= 0): #Verifica que la fecha sea valida y que el numero sea positivo
+        respuesta = fecha
+        for i in range(dias): #Se llama la funcion dia_siguiente la cantidad de veces igual al numero de dias ingresado demanera que la fecha se va actualizando
+            fecha_actualizada = dia_siguiente(respuesta) #Se reutiliza la funcion de dia_siguiente de la asignacion 3a
+            respuesta = fecha_actualizada
+        return respuesta
+    else:
+        return -1 #Si retorna -1 hay un error en los datos introducidos 
+    
 #Esta funcion es necesaria para el calculo del primer
 #dia de un mes en especifico
 def moduloMes(mes, anno):
