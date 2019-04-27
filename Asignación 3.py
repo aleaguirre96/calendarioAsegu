@@ -53,7 +53,7 @@ def dia_siguiente(fecha):
     validar_fecha = fecha_es_valida(fecha) #Se verifica que la fecha sea valida
     if validar_fecha:
         dias_mes = 0 # variable que guarda el largo de un dia
-        meses_30 = [3,6,9,11] #lista de meses que poseen 30 dias
+        meses_30 = [4,6,9,11] #lista de meses que poseen 30 dias
         anho = fecha[0]# se extrae el anho de la tupla ingresada
         mes = fecha[1]# se extrae el mes de la tupla ingresada
         dia = fecha[2]# se extrae el dia de la tupla ingresada
@@ -219,7 +219,38 @@ def fecha_futura(fecha,dias):
             respuesta = fecha_actualizada
         return respuesta
     else:
-        return -1 #Si retorna -1 hay un error en los datos introducidos 
+        return -1 #Si retorna -1 hay un error en los datos introducidos
+
+    
+#R8
+#Dadas dos fechas validas en cualquier orden, se debe dar la diferencia en dias que hay entre ellas
+#debe retornar un numero entero no negativo
+def dias_entre(fecha1,fecha2):
+    dias = 0
+    if fecha_es_valida(fecha1) == True and fecha_es_valida(fecha2) == True: #Verifica que la fecha sea valida y que el numero sea positivo
+        if verificaMayor(fecha1,fecha2) == True: #Escoge que fecha sera la de inicio
+            aux = fecha2
+            fecha2 = fecha1
+            fecha1 = aux
+        while fecha1 != fecha2: #Se llama a la funcion del dia siguiente hasta que la fecha de inicio sea igual a la final
+            fecha1 = dia_siguiente(fecha1) #Se utiliza la funcion de dia siguiente, para contar pasar la fecha
+            dias +=1 #Es el contador de los dias
+        return dias
+    else:
+        return -1 #Si retorna -1 hay un error en los datos introducidos
+
+#Esta funcion se utiliza para verificar si una fecha es mayor que otra
+def verificaMayor(fecha1,fecha2):
+    if fecha1[0] > fecha2[0]:
+        return True
+    elif fecha1[0] == fecha2[0] and fecha1[1] > fecha2[1]:
+        return True
+    elif fecha1[0] == fecha2[0] and fecha1[1] == fecha2[1] and fecha1[2] > fecha2[2]:
+        return True
+    else:
+        return False
+
+    
     
 #Esta funcion es necesaria para el calculo del primer
 #dia de un mes en especifico
